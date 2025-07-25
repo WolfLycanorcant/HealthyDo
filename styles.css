@@ -1,0 +1,658 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.app-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.header-content h1 i {
+    color: #e74c3c;
+}
+
+.tagline {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.mood-tracker {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.mood-tracker span {
+    font-weight: 500;
+    color: #555;
+}
+
+.mood-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.mood-btn {
+    background: none;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-btn:hover {
+    transform: scale(1.1);
+    border-color: #667eea;
+}
+
+.mood-btn.selected {
+    border-color: #667eea;
+    background: #667eea;
+    transform: scale(1.1);
+}
+
+/* Main Content Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Panel Styles */
+.tasks-panel,
+.calendar-panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.panel-header h2 {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.task-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Add Task Form */
+.add-task-section {
+    margin-bottom: 25px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#task-input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+#task-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+#task-date {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.add-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
+}
+
+/* Motivation Box */
+.motivation-box {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+}
+
+.motivation-box i {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+/* Tasks List */
+.tasks-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tasks-list {
+    list-style: none;
+}
+
+.task-item {
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    cursor: grab;
+}
+
+.task-item:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.task-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+    cursor: grabbing;
+}
+
+.task-item.completed {
+    opacity: 0.6;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+}
+
+.task-checkbox {
+    background: none;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.task-checkbox:hover {
+    border-color: #27ae60;
+}
+
+.task-item.completed .task-checkbox {
+    background: #27ae60;
+    border-color: #27ae60;
+    color: white;
+}
+
+.task-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-text {
+    font-weight: 500;
+    color: #333;
+}
+
+.task-date {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.edit-btn:hover {
+    background: #3498db;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* Calendar Styles */
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
+}
+
+#current-month-year {
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    padding: 10px 5px;
+    font-size: 0.9rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+.calendar-day:hover {
+    background: #e3f2fd;
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+}
+
+.calendar-day.today {
+    background: #667eea;
+    color: white;
+}
+
+.calendar-day.selected {
+    background: #764ba2;
+    color: white;
+}
+
+.calendar-day.has-tasks::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 6px;
+    height: 6px;
+    background: #e74c3c;
+    border-radius: 50%;
+}
+
+.selected-date-info {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.selected-date-info h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.date-tasks {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Progress Section */
+.progress-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.progress-header {
+    margin-bottom: 20px;
+}
+
+.progress-header h3 {
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 15px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .progress-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Drag and Drop Styles */
+.drag-over {
+    border-color: #667eea !important;
+    background: rgba(102, 126, 234, 0.1) !important;
+}
+
+.drop-indicator {
+    height: 3px;
+    background: #667eea;
+    border-radius: 2px;
+    margin: 5px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.drop-indicator.active {
+    opacity: 1;
+}
+
+/* Additional Task Styles */
+.task-item.overdue {
+    border-left: 4px solid #e74c3c;
+    background: #fdf2f2;
+}
+
+.task-item.overdue .task-text {
+    color: #c0392b;
+}
+
+/* Date Task Styles */
+.date-task {
+    transition: all 0.3s ease;
+}
+
+.date-task:hover {
+    transform: translateX(5px);
+}
+
+.date-task.completed .task-text {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Notification Styles */
+.notification {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Enhanced Drag Feedback */
+.task-item.dragging {
+    opacity: 0.7;
+    transform: rotate(3deg) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    cursor: grabbing;
+}
+
+.tasks-list.drag-active {
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 12px;
+}
+
+/* Smooth transitions for reordering */
+.task-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Focus styles for accessibility */
+.task-checkbox:focus,
+.edit-btn:focus,
+.delete-btn:focus,
+.add-btn:focus,
+.nav-btn:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Loading state for calendar */
+.calendar-grid.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Enhanced mood button animations */
+.mood-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.mood-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(102, 126, 234, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.mood-btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+/* Improved calendar day hover effects */
+.calendar-day {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-day::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(102, 126, 234, 0.1);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.calendar-day:hover::before {
+    transform: scale(1);
+}
+
+/* Task count badge animation */
+.task-stats span {
+    transition: color 0.3s ease;
+}
+
+.task-stats span:hover {
+    color: #667eea;
+}
+
+/* Improved scrollbar styling */
+.tasks-container::-webkit-scrollbar,
+.date-tasks::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tasks-container::-webkit-scrollbar-track,
+.date-tasks::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.tasks-container::-webkit-scrollbar-thumb,
+.date-tasks::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.tasks-container::-webkit-scrollbar-thumb:hover,
+.date-tasks::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
